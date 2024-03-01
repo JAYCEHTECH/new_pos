@@ -1,5 +1,7 @@
+from django.conf.urls.static import static
 from django.urls import path
 from . import views
+from django.conf import settings as conf_settings
 
 urlpatterns = [
     path('api', views.WalletUserListApiView.as_view()),
@@ -21,4 +23,4 @@ urlpatterns = [
     path('paystack_webhook', views.paystack_webhook, name='paystack_webhook'),
     path('hubtel_webhook', views.hubtel_webhook, name='hubtel_Webhook'),
     path('export_unknown_transactions/', views.export_unknown_transactions, name='export_unknown_transactions'),
-]
+] + static(conf_settings.STATIC_URL, document_root=conf_settings.STATIC_ROOT)
